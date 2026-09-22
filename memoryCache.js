@@ -79,7 +79,7 @@ module.exports = class MemoryCache {
     this._nodesByKey.set(key, this._mostRecentlyRead.head);
 
     // If we're over capacity, evict least recently read items.
-    while (this._maxItems > 0 && this._nodesByKey.size >= this._maxItems) {
+    while (this._maxItems > 0 && this._nodesByKey.size > this._maxItems) {
       const oldestItem = this._mostRecentlyRead.tail.value;
       await this.clear(oldestItem.key);
     }
